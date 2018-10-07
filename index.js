@@ -46,7 +46,7 @@ function checkIfInitialized() {
 }
 
 export default class CleverPush {
-  static addEventListener(type: any, handler: Function) {
+  static addEventListener(type, handler) {
     if (!checkIfInitialized()) return;
 
     invariant(
@@ -56,7 +56,6 @@ export default class CleverPush {
 
     _notificationHandler.set(type, handler);
 
-    // Check if there is a cache for this type of event
     var cache = _notificationCache.get(type);
     if (handler && cache) {
       handler(cache);
@@ -83,122 +82,61 @@ export default class CleverPush {
     }
   }
 
-  static registerForPushNotifications() {
-    if (!checkIfInitialized()) return;
-
-    if (Platform.OS === 'ios') {
-      RNCleverPush.registerForPushNotifications();
-    } else {
-      console.log('This function is not supported on Android');
-    }
-  }
-
-  static promptForPushNotificationsWithUserResponse(callback: Function) {
-    if (!checkIfInitialized()) return;
-
-    if (Platform.OS === 'ios') {
-      invariant(
-        typeof callback === 'function',
-        'Must provide a valid callback'
-      );
-      RNCleverPush.promptForPushNotificationsWithUserResponse(callback);
-    } else {
-      console.log('This function is not supported on Android');
-    }
-  }
-
-  static requestPermissions(permissions) {
-    if (!checkIfInitialized()) return;
-
-    var requestedPermissions = {};
-    if (Platform.OS === 'ios') {
-      if (permissions) {
-        requestedPermissions = {
-          alert: !!permissions.alert,
-          badge: !!permissions.badge,
-          sound: !!permissions.sound
-        };
-      } else {
-        requestedPermissions = {
-          alert: true,
-          badge: true,
-          sound: true
-        };
-      }
-      RNCleverPush.requestPermissions(requestedPermissions);
-    } else {
-      console.log('This function is not supported on Android');
-    }
-  }
-
   static init(channelId) {
     RNCleverPush.init(channelId);
   }
 
-  static checkPermissions(callback: Function) {
+  static getAvailableTags(callback) {
     if (!checkIfInitialized()) return;
 
-    if (Platform.OS === 'ios') {
-      invariant(
-        typeof callback === 'function',
-        'Must provide a valid callback'
-      );
-      RNCleverPush.checkPermissions(callback);
-    } else {
-      console.log('This function is not supported on Android');
-    }
+    RNCleverPush.getAvailableTags(callback);
   }
 
-  static promptForPushNotificationPermissions(callback) {
+  static getAvailableAttributes(callback) {
     if (!checkIfInitialized()) return;
 
-    if (Platform.OS === 'ios') {
-      RNCleverPush.promptForPushNotificationPermissions(callback);
-    } else {
-      console.log('This function is not supported on Android');
-    }
+    RNCleverPush.getAvailableAttributes(callback);
   }
 
-  static getPermissionSubscriptionState(callback: Function) {
+  static addSubscriptionTag(tagId) {
     if (!checkIfInitialized()) return;
 
-    invariant(
-      typeof callback === 'function',
-      'Must provide a valid callback'
-    );
-    RNCleverPush.getPermissionSubscriptionState(callback);
+    RNCleverPush.addSubscriptionTag(tagId);
   }
 
-  static deleteTag(key) {
+  static removeSubscriptionTag(tagId) {
     if (!checkIfInitialized()) return;
 
-    RNCleverPush.deleteTag(key);
+    RNCleverPush.removeSubscriptionTag(tagId);
   }
 
-  static enableVibrate(enable) {
+  static getSubscriptionTags(callback) {
     if (!checkIfInitialized()) return;
 
-    if (Platform.OS === 'android') {
-      RNCleverPush.enableVibrate(enable);
-    } else {
-      console.log('This method is not supported on iOS');
-    }
+    RNCleverPush.getSubscriptionTags(callback);
   }
 
-  static enableSound(enable) {
+  static hasSubscriptionTag(tagId, callback) {
     if (!checkIfInitialized()) return;
 
-    if (Platform.OS === 'android') {
-      RNCleverPush.enableSound(enable);
-    } else {
-      console.log('This method is not supported on iOS');
-    }
+    RNCleverPush.hasSubscriptionTag(tagId, callback);
   }
 
-  static setLogLevel(nsLogLevel, visualLogLevel) {
+  static getSubscriptionAttributes(callback) {
     if (!checkIfInitialized()) return;
 
-    RNCleverPush.setLogLevel(nsLogLevel, visualLogLevel);
+    RNCleverPush.getSubscriptionAttributes(callback);
   }
 
+  static getSubscriptionAttribute(attributeId, callback) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.getSubscriptionAttribute(attributeId, callback);
+  }
+
+  static setSubscriptionAttribute(attributeId, value) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.setSubscriptionAttribute(attributeId, value);
+  }
 }
