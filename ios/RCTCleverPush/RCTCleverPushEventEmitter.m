@@ -29,7 +29,7 @@ RCT_EXPORT_MODULE(RCTCleverPush)
 
 -(instancetype)init {
     if (self = [super init]) {
-        [CleverPush CleverPush_Log:ONE_S_LL_VERBOSE message:@"Initialized RCTCleverPushEventEmitter"];
+        NSLog(@"CleverPush: Initialized RCTCleverPushEventEmitter");
         
         for (NSString *eventName in [self supportedEvents])
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emitEvent:) name:eventName object:nil];
@@ -40,7 +40,7 @@ RCT_EXPORT_MODULE(RCTCleverPush)
 
 -(void)startObserving {
     hasListeners = true;
-    [CleverPush CleverPush_Log:ONE_S_LL_VERBOSE message:@"RCTCleverPushEventEmitter did start observing"];
+    NSLog(@"CleverPush: RCTCleverPushEventEmitter did start observing");
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"didSetBridge" object:nil];
     
@@ -49,7 +49,7 @@ RCT_EXPORT_MODULE(RCTCleverPush)
 
 -(void)stopObserving {
     hasListeners = false;
-    [CleverPush CleverPush_Log:ONE_S_LL_VERBOSE message:@"RCTCleverPushEventEmitter did stop observing"];
+    NSLog(@"CleverPush: RCTCleverPushEventEmitter did stop observing");
 }
 
 -(NSArray<NSString *> *)supportedEvents {
@@ -63,7 +63,7 @@ RCT_EXPORT_MODULE(RCTCleverPush)
 
 - (void)emitEvent:(NSNotification *)notification {
     if (!hasListeners) {
-        [CleverPush CleverPush_Log:ONE_S_LL_WARN message:[NSString stringWithFormat:@"Attempted to send an event (%@) when no listeners were set.", notification.name]];
+        NSLog(@"CleverPush: Attempted to send an event (%@) when no listeners were set.", notification.name);
         return;
     }
     
@@ -74,7 +74,7 @@ RCT_EXPORT_MODULE(RCTCleverPush)
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:body];
 }
 
-RCT_EXPORT_METHOD(init:(NSString *)channelId {
+RCT_EXPORT_METHOD(init:(NSString *)channelId) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[RCTCleverPush sharedInstance] init:channelId];
     });
@@ -97,7 +97,7 @@ RCT_EXPORT_METHOD(getSubscriptionTags:(RCTResponseSenderBlock)callback) {
 
 RCT_EXPORT_METHOD(getSubscriptionAttributes:(RCTResponseSenderBlock)callback) {
     NSDictionary* subscriptionAttributes = [CleverPush getSubscriptionAttributes];
-    callback(@[[NSNull null], subscriptionTags]);
+    callback(@[[NSNull null], subscriptionAttributes]);
 }
 
 RCT_EXPORT_METHOD(getSubscriptionAttribute:(NSString *)attributeId callback:(RCTResponseSenderBlock)callback) {
