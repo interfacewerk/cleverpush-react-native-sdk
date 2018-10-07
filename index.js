@@ -131,18 +131,8 @@ export default class CleverPush {
     }
   }
 
-  static configure() {
-    if (!checkIfInitialized()) return;
-
-    RNCleverPush.configure();
-  }
-
   static init(channelId) {
-    if (Platform.OS === 'ios') {
-      RNCleverPush.initWithChannelId(channelId);
-    } else {
-      RNCleverPush.init(channelId);
-    }
+    RNCleverPush.init(channelId);
   }
 
   static checkPermissions(callback: Function) {
