@@ -1,0 +1,30 @@
+{
+  "name": "cleverpush-react-native",
+  "version": "0.0.1",
+  "description": "CleverPush React Native SDK",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "invariant": "^2.2.2"
+  },
+  "rnpm": {
+    "ios": {
+      "sourceDir": "./ios"
+    }
+  },
+  "keywords": [
+    "cleverpush",
+    "react-native"
+  ],
+  "bugs": {
+    "url": "https://github.com/cleverpush/cleverpush-react-native-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cleverpush/cleverpush-react-native-sdk"
+  },
+  "author": "CleverPush UG (haftungsbeschränkt)",
+  "license": "SEE LICENSE IN LICENSE"
+}
