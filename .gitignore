@@ -7,3 +7,4 @@ ios/RCTCleverPush.xcodeproj/xcuserdata
 ios/RCTCleverPush.xcodeproj/project.xcworkspace/xcuserdata
 local.properties
 node_modules
+.DS_Store
