@@ -4,7 +4,7 @@
 #import "CleverPush.h"
 #endif
 
-@interface RCTCleverPush : NSObject <CPSubscriptionObserver>
+@interface RCTCleverPush : NSObject
 
 + (RCTCleverPush *) sharedInstance;
 

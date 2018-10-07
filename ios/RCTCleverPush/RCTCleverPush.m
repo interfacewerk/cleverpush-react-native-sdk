@@ -41,11 +41,21 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     return _sharedInstance;
 }
 
+- (NSString*)stringifyNotificationOpenedResult:(CPNotificationOpenedResult*)result {
+    NSMutableDictionary* obj = [NSMutableDictionary new];
+    [obj setObject:result.notification forKeyedSubscript:@"notification"];
+    [obj setObject:result.subscription forKeyedSubscript:@"subscription"];
+
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:obj options:0 error:&err];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
 - (void)initCleverPush {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBeginObserving) name:@"didSetBridge" object:nil];
     
     [CleverPush initWithLaunchOptions:nil channelId:nil handleNotificationOpened:^(CPNotificationOpenedResult* result) {
-        [self handleRemoteNotificationOpened:[result stringify]];
+        [self handleRemoteNotificationOpened:[self stringifyNotificationOpenedResult:result]];
     }];
     didInitialize = false;
 }
@@ -55,7 +65,7 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (coldStartCPNotificationOpenedResult) {
-            [self handleRemoteNotificationOpened:[coldStartCPNotificationOpenedResult stringify]];
+            [self handleRemoteNotificationOpened:[self stringifyNotificationOpenedResult:coldStartCPNotificationOpenedResult]];
             coldStartCPNotificationOpenedResult = nil;
         }
     });
@@ -74,7 +84,7 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
         if (!RCTCleverPush.sharedInstance.didStartObserving) {
              coldStartCPNotificationOpenedResult = result;
         } else {
-             [self handleRemoteNotificationOpened:[result stringify]];
+             [self handleRemoteNotificationOpened:[self stringifyNotificationOpenedResult:result]];
         }
   }];
 }
