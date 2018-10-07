@@ -137,11 +137,11 @@ export default class CleverPush {
     RNCleverPush.configure();
   }
 
-  static init(appId, iOSSettings) {
+  static init(channelId) {
     if (Platform.OS === 'ios') {
-      RNCleverPush.initWithAppId(appId, iOSSettings);
+      RNCleverPush.initWithChannelId(channelId);
     } else {
-      RNCleverPush.init(appId);
+      RNCleverPush.init(channelId);
     }
   }
 
