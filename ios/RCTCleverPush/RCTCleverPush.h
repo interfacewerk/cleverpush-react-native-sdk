@@ -13,6 +13,6 @@
 
 @property (nonatomic) BOOL didStartObserving;
 
-- (void)configureWithChannelId:(NSString *)channelId;
+- (void)init:(NSString *)channelId;
 
 @end

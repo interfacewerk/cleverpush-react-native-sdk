@@ -1,8 +1,9 @@
 .idea
 *.iml
 android/build
-android/.gradle
+android/.gradle/
 android/.idea
 ios/RCTCleverPush.xcodeproj/xcuserdata
+ios/RCTCleverPush.xcodeproj/project.xcworkspace/xcuserdata
 local.properties
 node_modules

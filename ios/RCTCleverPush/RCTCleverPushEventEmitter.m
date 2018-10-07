@@ -74,9 +74,9 @@ RCT_EXPORT_MODULE(RCTCleverPush)
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:body];
 }
 
-RCT_EXPORT_METHOD(initWithChannelId:(NSString *)channelId settings:(NSDictionary *)settings) {
+RCT_EXPORT_METHOD(init:(NSString *)channelId {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[RCTCleverPush sharedInstance] configureWithChannelId:channelId settings:settings];
+        [[RCTCleverPush sharedInstance] init:channelId];
     });
 }
 

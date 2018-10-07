@@ -65,7 +65,7 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)configureWithChannelId:(NSString *)channelId {
+- (void)init:(NSString *)channelId {
     if (didInitialize)
         return;
     
