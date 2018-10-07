@@ -107,7 +107,7 @@ RCT_EXPORT_METHOD(getSubscriptionAttribute:(NSString *)attributeId callback:(RCT
 
 RCT_EXPORT_METHOD(hasSubscriptionTag:(NSString *)tagId callback:(RCTResponseSenderBlock)callback) {
         bool hasTag = [CleverPush hasSubscriptionTag:tagId];
-        callback(@[[NSNull null], hasTag]);
+        callback(@[[NSNull null], [NSNumber numberWithBool:hasTag]]);
 }
 
 RCT_EXPORT_METHOD(addSubscriptionTag:(NSString *)tagId) {
