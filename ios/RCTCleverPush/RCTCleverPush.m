@@ -56,13 +56,6 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBeginObserving) name:@"didSetBridge" object:nil];
     
-    [CleverPush initWithLaunchOptions:nil channelId:nil handleNotificationOpened:^(CPNotificationOpenedResult* result) {
-        NSLog(@"CleverPush: initCleverPush: notificationOpened");
-        [self handleNotificationOpened:[self stringifyNotificationOpenedResult:result]];
-    } handleSubscribed:^(NSString *result) {
-        NSLog(@"CleverPush: initCleverPush: handleSubscribed");
-        [self handleSubscribed:result];
-    }];
     didInitialize = false;
 }
 

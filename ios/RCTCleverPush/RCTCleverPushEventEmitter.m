@@ -71,6 +71,7 @@ RCT_EXPORT_MODULE(RCTCleverPush)
 }
 
 + (void)sendEventWithName:(NSString *)name withBody:(NSDictionary *)body {
+    NSLog(@"CleverPush: sending event %@", name);
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:body];
 }
 
