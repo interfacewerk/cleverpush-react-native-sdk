@@ -36,17 +36,17 @@ static void injectSelector(Class newClass, SEL newSel, Class addToClass, SEL mak
     dispatch_once(&onceToken, ^{
         Class delegateClass = [delegate class];
         
-        injectSelector(self.class, @selector(CleverPushApplication:didFinishLaunchingWithOptions:),
+        injectSelector(self.class, @selector(cleverPushApplication:didFinishLaunchingWithOptions:),
                        delegateClass, @selector(application:didFinishLaunchingWithOptions:));
         [self setCleverPushReactNativeDelegate:delegate];
     });
 }
 
-- (BOOL)CleverPushApplication:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
+- (BOOL)cleverPushApplication:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     [RCTCleverPush.sharedInstance initCleverPush];
     
-    if ([self respondsToSelector:@selector(CleverPushApplication:didFinishLaunchingWithOptions:)])
-        return [self CleverPushApplication:application didFinishLaunchingWithOptions:launchOptions];
+    if ([self respondsToSelector:@selector(cleverPushApplication:didFinishLaunchingWithOptions:)])
+        return [self cleverPushApplication:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 

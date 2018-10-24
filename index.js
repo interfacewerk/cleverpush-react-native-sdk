@@ -139,4 +139,22 @@ export default class CleverPush {
 
     RNCleverPush.setSubscriptionAttribute(attributeId, value);
   }
+
+  static isSubscribed(callback) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.isSubscribed(callback);
+  }
+
+  static subscribe(callback) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.subscribe(callback);
+  }
+
+  static unsubscribe(callback) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.unsubscribe(callback);
+  }
 }

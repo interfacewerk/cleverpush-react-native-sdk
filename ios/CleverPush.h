@@ -30,15 +30,17 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 
 + (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId;
 + (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleNotificationOpened:(CPHandleNotificationOpenedBlock)openedCallback;
-+ (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleNotificationOpened:(CPHandleNotificationOpenedBlock)openedCallback settings:(NSDictionary*)settings;
++ (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleNotificationOpened:(CPHandleNotificationOpenedBlock)openedCallback autoRegister:(BOOL)autoRegister;
 + (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleSubscribed:(CPHandleSubscribedBlock)subscribedCallback;
-+ (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleSubscribed:(CPHandleSubscribedBlock)subscribedCallback settings:(NSDictionary*)settings;
++ (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleSubscribed:(CPHandleSubscribedBlock)subscribedCallback autoRegister:(BOOL)autoRegister;
 + (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleNotificationOpened:(CPHandleNotificationOpenedBlock)openedCallback handleSubscribed:(CPHandleSubscribedBlock)subscribedCallback;
-+ (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleNotificationOpened:(CPHandleNotificationOpenedBlock)openedCallback handleSubscribed:(CPHandleSubscribedBlock)subscribedCallback settings:(NSDictionary*)settings;
++ (id)initWithLaunchOptions:(NSDictionary*)launchOptions channelId:(NSString*)channelId handleNotificationOpened:(CPHandleNotificationOpenedBlock)openedCallback handleSubscribed:(CPHandleSubscribedBlock)subscribedCallback autoRegister:(BOOL)autoRegister;
 
 + (NSString*)channelId;
 
-+ (void)registerForPushNotifications;
++ (BOOL)isSubscribed;
++ (void)subscribe;
++ (void)unsubscribe;
 
 + (void)didRegisterForRemoteNotifications:(UIApplication*)app deviceToken:(NSData*)inDeviceToken;
 + (void)handleDidFailRegisterForRemoteNotification:(NSError*)err;
@@ -53,7 +55,7 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 + (NSArray*)getAvailableTags;
 + (NSDictionary*)getAvailableAttributes;
 + (NSArray*)getSubscriptionTags;
-+ (bool)hasSubscriptionTag:(NSString*)tagId;
++ (BOOL)hasSubscriptionTag:(NSString*)tagId;
 + (NSDictionary*)getSubscriptionAttributes;
 + (NSString*)getSubscriptionAttribute:(NSString*)attributeId;
 

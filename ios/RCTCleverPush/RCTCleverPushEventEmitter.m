@@ -122,4 +122,17 @@ RCT_EXPORT_METHOD(setSubscriptionAttribute:(NSString *)attributeId value:(NSStri
     [CleverPush setSubscriptionAttribute:attributeId value:value];
 }
 
+RCT_EXPORT_METHOD(isSubscribed:(RCTResponseSenderBlock)callback) {
+    bool isSubscribed = [CleverPush isSubscribed:tagId];
+    callback(@[[NSNull null], [NSNumber numberWithBool:hasTag]]);
+}
+
+RCT_EXPORT_METHOD(subscribe) {
+    [CleverPush subscribe];
+}
+
+RCT_EXPORT_METHOD(unsubscribe) {
+    [CleverPush unsubscribe];
+}
+
 @end

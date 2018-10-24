@@ -55,7 +55,11 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBeginObserving) name:@"didSetBridge" object:nil];
     
     [CleverPush initWithLaunchOptions:nil channelId:nil handleNotificationOpened:^(CPNotificationOpenedResult* result) {
-        [self handleRemoteNotificationOpened:[self stringifyNotificationOpenedResult:result]];
+        NSLog(@"CP_EVENT: initCleverPush: notificationOpened");
+        [self handleNotificationOpened:[self stringifyNotificationOpenedResult:result]];
+    } handleSubscribed:^(NSString *result) {
+        NSLog(@"CP_EVENT: initCleverPush: handleSubscribed");
+        [self handleSubscribed:result];
     }];
     didInitialize = false;
 }
@@ -65,7 +69,7 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (coldStartCPNotificationOpenedResult) {
-            [self handleRemoteNotificationOpened:[self stringifyNotificationOpenedResult:coldStartCPNotificationOpenedResult]];
+            [self handleNotificationOpened:[self stringifyNotificationOpenedResult:coldStartCPNotificationOpenedResult]];
             coldStartCPNotificationOpenedResult = nil;
         }
     });
@@ -84,16 +88,25 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
         if (!RCTCleverPush.sharedInstance.didStartObserving) {
              coldStartCPNotificationOpenedResult = result;
         } else {
-             [self handleRemoteNotificationOpened:[self stringifyNotificationOpenedResult:result]];
+             [self handleNotificationOpened:[self stringifyNotificationOpenedResult:result]];
         }
   }];
 }
 
-- (void)handleRemoteNotificationOpened:(NSString *)result {
+- (void)handleNotificationOpened:(NSString *)result {
     NSDictionary *json = [self jsonObjectWithString:result];
     
-    if (json)
+    if (json) {
         [self sendEvent:CPEventString(NotificationOpened) withBody:json];
+    }
+}
+
+- (void)handleSubscribed:(NSString *)subscriptionId {
+    NSDictionary* result = [[NSDictionary alloc] initWithObjectsAndKeys:
+     subscriptionId, @"id",
+     nil];
+
+    [self sendEvent:CPEventString(Subscribed) withBody:result];
 }
 
 - (NSDictionary *)jsonObjectWithString:(NSString *)jsonString {
