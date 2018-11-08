@@ -13,6 +13,7 @@ import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
 import com.cleverpush.Notification;
 import com.cleverpush.Subscription;
+import com.cleverpush.listener.SubscribedListener;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -46,6 +47,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
     private Callback pendingGetSubscriptionAttributesCallback;
     private Callback pendingHasSubscriptionTagCallback;
     private Callback pendingGetSubscriptionAttributeCallback;
+    private Callback pendingIsSubscribedCallback;
 
     public RNCleverPush(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -109,7 +111,12 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
         }
 
         this.cleverPush = CleverPush.getInstance(context);
-        cleverPush.init(channelId, new NotificationOpenedHandler(mReactContext));
+        cleverPush.init(channelId, new NotificationOpenedHandler(mReactContext), new SubscribedListener() {
+            @Override
+            public void subscribed(String subscriptionId) {
+                notifySubscribed(subscriptionId);
+            }
+        });
     }
 
     @ReactMethod
@@ -227,6 +234,39 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
         this.cleverPush.setSubscriptionAttribute(attributeId, value);
     }
 
+    @ReactMethod
+    public void isSubscribed(final Callback callback) {
+        if (pendingIsSubscribedCallback == null)
+            pendingIsSubscribedCallback = callback;
+
+        boolean isSubscribed = this.cleverPush.isSubscribed();
+
+        if (pendingGetAvailableAttributesCallback != null)
+            pendingGetAvailableAttributesCallback.invoke(isSubscribed);
+
+        pendingGetAvailableAttributesCallback = null;
+    }
+
+    @ReactMethod
+    public void setSubscriptionLanguage(String language) {
+        this.cleverPush.setSubscriptionLanguage(language);
+    }
+
+    @ReactMethod
+    public void setSubscriptionCountry(String country) {
+        this.cleverPush.setSubscriptionCountry(country);
+    }
+
+    @ReactMethod
+    public void subscribe() {
+        this.cleverPush.subscribe();
+    }
+
+    @ReactMethod
+    public void unsubscribe() {
+        this.cleverPush.unsubscribe();
+    }
+
     private void registerNotificationsOpenedNotification() {
         IntentFilter intentFilter = new IntentFilter(NOTIFICATION_OPENED_INTENT_FILTER);
         mReactContext.registerReceiver(new BroadcastReceiver() {
@@ -235,6 +275,16 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
                 notifyNotificationOpened(intent.getExtras());
             }
         }, intentFilter);
+    }
+
+    private void notifySubscribed(String subscriptionId) {
+        try {
+            WritableMap result = new WritableNativeMap();
+            result.putString("id", subscriptionId);
+            sendEvent("CleverPush-subscribed", result);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     private void notifyNotificationOpened(Bundle bundle) {

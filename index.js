@@ -140,21 +140,33 @@ export default class CleverPush {
     RNCleverPush.setSubscriptionAttribute(attributeId, value);
   }
 
+  static setSubscriptionLanguage(value) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.setSubscriptionLanguage(value);
+  }
+
+  static setSubscriptionCountry(value) {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.setSubscriptionCountry(value);
+  }
+
   static isSubscribed(callback) {
     if (!checkIfInitialized()) return;
 
     RNCleverPush.isSubscribed(callback);
   }
 
-  static subscribe(callback) {
+  static subscribe() {
     if (!checkIfInitialized()) return;
 
-    RNCleverPush.subscribe(callback);
+    RNCleverPush.subscribe();
   }
 
-  static unsubscribe(callback) {
+  static unsubscribe() {
     if (!checkIfInitialized()) return;
 
-    RNCleverPush.unsubscribe(callback);
+    RNCleverPush.unsubscribe();
   }
 }

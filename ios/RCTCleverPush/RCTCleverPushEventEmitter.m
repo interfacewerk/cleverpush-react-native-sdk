@@ -128,6 +128,14 @@ RCT_EXPORT_METHOD(isSubscribed:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null], [NSNumber numberWithBool:isSubscribed]]);
 }
 
+RCT_EXPORT_METHOD(setSubscriptionLanguage:(NSString *)language) {
+    [CleverPush setSubscriptionLanguage:language];
+}
+
+RCT_EXPORT_METHOD(setSubscriptionCountry:(NSString *)country) {
+    [CleverPush setSubscriptionCountry:country];
+}
+
 RCT_EXPORT_METHOD(subscribe) {
     [CleverPush subscribe];
 }
