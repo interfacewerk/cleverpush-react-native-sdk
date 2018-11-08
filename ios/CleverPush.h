@@ -44,7 +44,9 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 
 + (void)didRegisterForRemoteNotifications:(UIApplication*)app deviceToken:(NSData*)inDeviceToken;
 + (void)handleDidFailRegisterForRemoteNotification:(NSError*)err;
-+ (void)handlePushReceived:(NSDictionary*)messageDict isActive:(BOOL)isActive;
++ (void)handleNotificationReceived:(NSDictionary*)messageDict isActive:(BOOL)isActive;
++ (void)handleNotificationReceived:(NSDictionary*)messageDict isActive:(BOOL)isActive wasOpened:(BOOL)wasOpened;
++ (BOOL)handleSilentNotificationReceived:(UIApplication*)application UserInfo:(NSDictionary*)messageDict completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
 + (void)enqueueRequest:(NSURLRequest*)request onSuccess:(CPResultSuccessBlock)successBlock onFailure:(CPFailureBlock)failureBlock;
 + (void)handleJSONNSURLResponse:(NSURLResponse*) response data:(NSData*) data error:(NSError*) error onSuccess:(CPResultSuccessBlock)successBlock onFailure:(CPFailureBlock)failureBlock;
@@ -58,5 +60,7 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 + (BOOL)hasSubscriptionTag:(NSString*)tagId;
 + (NSDictionary*)getSubscriptionAttributes;
 + (NSString*)getSubscriptionAttribute:(NSString*)attributeId;
++ (void)setSubscriptionLanguage:(NSString*)language;
++ (void)setSubscriptionCountry:(NSString*)country;
 
 @end
