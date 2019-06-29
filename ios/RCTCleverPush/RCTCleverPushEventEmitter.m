@@ -144,4 +144,8 @@ RCT_EXPORT_METHOD(unsubscribe) {
     [CleverPush unsubscribe];
 }
 
+RCT_EXPORT_METHOD(showTopicsDialog) {
+    [CleverPush unsubscribe];
+showTopicsDialog
+
 @end
