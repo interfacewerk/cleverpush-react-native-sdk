@@ -169,4 +169,10 @@ export default class CleverPush {
 
     RNCleverPush.unsubscribe();
   }
+
+  static showTopicsDialog() {
+    if (!checkIfInitialized()) return;
+
+    RNCleverPush.showTopicsDialog();
+  }
 }
