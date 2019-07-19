@@ -272,6 +272,11 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
         this.cleverPush.showTopicsDialog();
     }
 
+    @ReactMethod
+    public Set<Notification> getNotifications() {
+        return this.cleverPush.getNotifications();
+    }
+
     private void registerNotificationsOpenedNotification() {
         IntentFilter intentFilter = new IntentFilter(NOTIFICATION_OPENED_INTENT_FILTER);
         mReactContext.registerReceiver(new BroadcastReceiver() {

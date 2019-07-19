@@ -148,4 +148,8 @@ RCT_EXPORT_METHOD(showTopicsDialog) {
     [CleverPush showTopicsDialog];
 }
 
+RCT_EXPORT_METHOD(getNotifications) {
+    [CleverPush getNotifications];
+}
+
 @end
