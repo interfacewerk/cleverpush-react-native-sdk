@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		294C250622E5CF4000A8E337 /* libCleverPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAADD42320B378FD0089D086 /* libCleverPush.a */; };
 		CA1CC868200FE3C3005B66AA /* RCTCleverPushExtensionService.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1CC867200FE3C3005B66AA /* RCTCleverPushExtensionService.m */; };
 		CA3D8B582076D83C006F3572 /* RCTCleverPush.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB40CC21C5E4E5500CBF09B /* RCTCleverPush.h */; };
 		CA3D8B592076D83C006F3572 /* RCTCleverPushExtensionService.h in Headers */ = {isa = PBXBuildFile; fileRef = CA1CC866200FE3C3005B66AA /* RCTCleverPushExtensionService.h */; };
 		CA3D8B5A2076D84E006F3572 /* RCTCleverPush.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = FDB40CC21C5E4E5500CBF09B /* RCTCleverPush.h */; };
 		CA3D8B5B2076D84E006F3572 /* RCTCleverPushExtensionService.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = CA1CC866200FE3C3005B66AA /* RCTCleverPushExtensionService.h */; };
 		CA63F32E20ACFD60009AE90F /* UIApplication+RCTCleverPush.m in Sources */ = {isa = PBXBuildFile; fileRef = CA63F32C20ACFD60009AE90F /* UIApplication+RCTCleverPush.m */; };
-		CAADD42420B378FE0089D086 /* libCleverPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAADD42320B378FD0089D086 /* libCleverPush.a */; };
 		CAADD42620B379070089D086 /* CleverPush.h in Headers */ = {isa = PBXBuildFile; fileRef = CAADD42520B379060089D086 /* CleverPush.h */; };
 		CAADD42720B3791A0089D086 /* CleverPush.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = CAADD42520B379060089D086 /* CleverPush.h */; };
 		CACB39D6202D232A00D86CD1 /* RCTCleverPushEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CACB39D5202D232A00D86CD1 /* RCTCleverPushEventEmitter.m */; };
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAADD42420B378FE0089D086 /* libCleverPush.a in Frameworks */,
+				294C250622E5CF4000A8E337 /* libCleverPush.a in Frameworks */,
 				FD2CCC851C772B4200B2B24E /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +158,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 3245CDE41BFEE35C00EABF68;
