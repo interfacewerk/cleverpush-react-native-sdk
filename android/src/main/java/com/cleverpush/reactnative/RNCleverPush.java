@@ -48,6 +48,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
     private Callback pendingHasSubscriptionTagCallback;
     private Callback pendingGetSubscriptionAttributeCallback;
     private Callback pendingIsSubscribedCallback;
+    private Callback pendingGetNotificationsCallback;
 
     public RNCleverPush(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -273,8 +274,27 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
     }
 
     @ReactMethod
-    public Set<Notification> getNotifications() {
-        return this.cleverPush.getNotifications();
+    public Set<Notification> getNotifications(final Callback callback) {
+        if (pendingGetNotificationsCallback == null)
+            pendingGetNotificationsCallback = callback;
+
+        Set<Notification> notifications = this.cleverPush.getNotifications();
+        WritableArray writableArray = new WritableNativeArray();
+        for (Notification notification : notifications) {
+            WritableMap writeableMap = new WritableNativeMap();
+            writeableMap.putString("id", notification.getId());
+            writeableMap.putString("title", notification.getTitle());
+            writeableMap.putString("text", notification.getText());
+            writeableMap.putString("url", notification.getUrl());
+            writeableMap.putString("iconUrl", notification.getIconUrl());
+            writeableMap.putString("mediaUrl", notification.getMediaUrl());
+            writableArray.pushMap(writeableMap);
+        }
+
+        if (pendingGetNotificationsCallback != null)
+            pendingGetNotificationsCallback.invoke(writableArray);
+
+        pendingGetNotificationsCallback = null;
     }
 
     private void registerNotificationsOpenedNotification() {
