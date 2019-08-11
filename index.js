@@ -83,7 +83,7 @@ export default class CleverPush {
   }
 
   static init(channelId, options) {
-    RNCleverPush.init(channelId, options || {});
+    RNCleverPush.init(Object.assign({ channelId }, options));
   }
 
   static getAvailableTags(callback) {

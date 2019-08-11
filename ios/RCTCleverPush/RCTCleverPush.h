@@ -10,6 +10,6 @@
 
 @property (nonatomic) BOOL didStartObserving;
 
-- (void)init:(NSString *)channelId;
+- (void)init:(NSDictionary *)options;
 
 @end

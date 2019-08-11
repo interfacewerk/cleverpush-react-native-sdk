@@ -78,22 +78,14 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     });
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
-- (void)init:(NSString *)channelId {
-    
-}
-
-- (void)init:(NSString *)channelId withOptions:(NSDictionary *)options {
+- (void)init:(NSDictionary *)options {
     if (didInitialize)
         return;
     
     NSLog(@"CleverPush: init with channelId called");
     
     BOOL autoRegister = YES;
+    NSString *channelId = [options objectForKey:@"channelId"];
     if ([[options objectForKey:@"autoRegister"] isKindOfClass:[NSNumber class]]) {
         autoRegister = [[options objectForKey:@"autoRegister"] boolValue];
     }
