@@ -137,11 +137,15 @@ RCT_EXPORT_METHOD(setSubscriptionCountry:(NSString *)country) {
 }
 
 RCT_EXPORT_METHOD(subscribe) {
-    [CleverPush subscribe];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CleverPush subscribe];
+    });
 }
 
 RCT_EXPORT_METHOD(unsubscribe) {
-    [CleverPush unsubscribe];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CleverPush unsubscribe];
+    });
 }
 
 RCT_EXPORT_METHOD(showTopicsDialog) {
