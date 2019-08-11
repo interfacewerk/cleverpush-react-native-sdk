@@ -82,11 +82,21 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
 - (void)init:(NSString *)channelId {
+    
+}
+
+- (void)init:(NSString *)channelId withOptions:(NSDictionary *)options {
     if (didInitialize)
         return;
     
     NSLog(@"CleverPush: init with channelId called");
+    
+    BOOL autoRegister = YES;
+    if ([[options objectForKey:@"autoRegister"] isKindOfClass:[NSNumber class]]) {
+        autoRegister = [[options objectForKey:@"autoRegister"] boolValue];
+    }
     
     didInitialize = true;
     [CleverPush initWithLaunchOptions:nil channelId:channelId handleNotificationOpened:^(CPNotificationOpenedResult *result) {
@@ -100,7 +110,7 @@ CPNotificationOpenedResult* coldStartCPNotificationOpenedResult;
     } handleSubscribed:^(NSString *result) {
         NSLog(@"CleverPush: init: handleSubscribed");
         [self handleSubscribed:result];
-    }];
+    } autoRegister:autoRegister];
 }
 
 - (void)handleNotificationOpened:(NSString *)result {
