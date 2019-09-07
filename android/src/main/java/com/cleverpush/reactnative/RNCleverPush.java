@@ -274,7 +274,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
     }
 
     @ReactMethod
-    public Set<Notification> getNotifications(final Callback callback) {
+    public void getNotifications(final Callback callback) {
         if (pendingGetNotificationsCallback == null)
             pendingGetNotificationsCallback = callback;
 
