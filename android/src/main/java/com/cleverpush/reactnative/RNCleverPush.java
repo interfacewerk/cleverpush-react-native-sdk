@@ -20,6 +20,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
@@ -79,7 +80,9 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
 
         if (channelId != null && channelId.length() > 0) {
             try {
-                init(channelId);
+                WritableMap map = new WritableNativeMap();
+                map.putString("channelId", channelId);
+                init(map);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -97,7 +100,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
     }
 
     @ReactMethod
-    public void init(String channelId) throws Exception {
+    public void init(ReadableMap options) throws Exception {
         Context context = getCurrentActivity();
 
         if (cleverPushInitDone) {
@@ -112,7 +115,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
         }
 
         this.cleverPush = CleverPush.getInstance(context);
-        cleverPush.init(channelId, new NotificationOpenedHandler(mReactContext), new SubscribedListener() {
+        cleverPush.init(options.getString("channelId"), new NotificationOpenedHandler(mReactContext), new SubscribedListener() {
             @Override
             public void subscribed(String subscriptionId) {
                 notifySubscribed(subscriptionId);
