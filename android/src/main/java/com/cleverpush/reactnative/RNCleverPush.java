@@ -245,10 +245,10 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
 
         boolean isSubscribed = this.cleverPush.isSubscribed();
 
-        if (pendingGetAvailableAttributesCallback != null)
-            pendingGetAvailableAttributesCallback.invoke(isSubscribed);
+        if (pendingIsSubscribedCallback != null)
+            pendingIsSubscribedCallback.invoke(isSubscribed);
 
-        pendingGetAvailableAttributesCallback = null;
+        pendingIsSubscribedCallback = null;
     }
 
     @ReactMethod
