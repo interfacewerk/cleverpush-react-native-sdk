@@ -245,10 +245,10 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
 
         boolean isSubscribed = this.cleverPush.isSubscribed();
 
-        if (pendingGetAvailableAttributesCallback != null)
-            pendingGetAvailableAttributesCallback.invoke(isSubscribed);
+        if (pendingIsSubscribedCallback != null)
+            pendingIsSubscribedCallback.invoke(null, isSubscribed);
 
-        pendingGetAvailableAttributesCallback = null;
+        pendingIsSubscribedCallback = null;
     }
 
     @ReactMethod
@@ -285,7 +285,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
         WritableArray writableArray = new WritableNativeArray();
         for (Notification notification : notifications) {
             WritableMap writeableMap = new WritableNativeMap();
-            writeableMap.putString("id", notification.getId());
+            writeableMap.putString("_id", notification.getId());
             writeableMap.putString("title", notification.getTitle());
             writeableMap.putString("text", notification.getText());
             writeableMap.putString("url", notification.getUrl());
@@ -295,7 +295,7 @@ public class RNCleverPush extends ReactContextBaseJavaModule implements Lifecycl
         }
 
         if (pendingGetNotificationsCallback != null)
-            pendingGetNotificationsCallback.invoke(writableArray);
+            pendingGetNotificationsCallback.invoke(null, writableArray);
 
         pendingGetNotificationsCallback = null;
     }
