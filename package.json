@@ -14,11 +14,11 @@
     "react-native"
   ],
   "bugs": {
-    "url": "https://github.com/cleverpush/cleverpush-react-native-sdk/issues"
+    "url": "https://github.com/interfacewerk/cleverpush-react-native-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cleverpush/cleverpush-react-native-sdk"
+    "url": "https://github.com/interfacewerk/cleverpush-react-native-sdk"
   },
   "author": "CleverPush UG (haftungsbeschränkt)",
   "license": "SEE LICENSE IN LICENSE"
